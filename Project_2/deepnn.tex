@@ -1,0 +1,664 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{subcaption}
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{tcolorbox} % Use for boxes
+\usepackage{hyperref} % Use for URL
+\usepackage{amsmath} % Used for matrices
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassTime): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+\setcounter{homeworkProblemCounter}{-1}
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#$2$} % Assignment title
+\newcommand{\hmwkDueDate}{Friday,\ February\ 23,\ 2018} % Due date
+\newcommand{\hmwkClass}{CSC411} % Course/class
+\newcommand{\hmwkClassTime}{L0101} % Class/lecture time
+\newcommand{\hmwkAuthorName}{Zhiyan Deng, Xin Jie Lee} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+%\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PREFIX: Code
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[Prefix]
+
+The code for parts 1 to 6 of this project is written in Python 2.7.\\
+The code for parts 8 to 10 of this project is written in Python 3.6.
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+
+\noindent \textit{\textbf{Part 1}: Dataset description}\\
+
+The MNIST dataset contains 60,000 training images and 10,000 test images of handwritten digits 0-9. Shown Below is the breakdown of the number of images available for each digit:\\
+
+\begin{tcolorbox}
+Number of digit 0 training images: 5923\\
+Number of digit 1 training images: 6742\\
+Number of digit 2 training images: 5958\\
+Number of digit 3 training images: 6131\\
+Number of digit 4 training images: 5842\\
+Number of digit 5 training images: 5421\\
+Number of digit 6 training images: 5918\\
+Number of digit 7 training images: 6265\\
+Number of digit 8 training images: 5851\\
+Number of digit 9 training images: 5949\\
+Total Number of Training Images: 60000\\
+Number of digit 0 test images: 980\\
+Number of digit 1 test images: 1135\\
+Number of digit 2 test images: 1032\\
+Number of digit 3 test images: 1010\\
+Number of digit 4 test images: 982\\
+Number of digit 5 test images: 892\\
+Number of digit 6 test images: 958\\
+Number of digit 7 test images: 1028\\
+Number of digit 8 test images: 974\\
+Number of digit 9 test images: 1009\\
+Total Number of Test Images: 10000
+\end{tcolorbox}
+
+Shown below are examples of the handwritten digits in the dataset.\\
+
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{part1.png}
+    \caption{Samples of handwritten digits in the MNIST dataset}
+    \label{fig:MNISTsample}
+\end{figure*}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+\noindent \textit{\textbf{Part 2}: Implement Basic Neural Network}\\
+
+To generate the output of a single neuron in a neural network layer, the $784 \times M$ matrix of input images is mutiplied with the $n \times 784$ matrix of weights and added to a $N \times 1$ bias vector to produce an $N \times M$ output. The output will be transformed by the softmax function to produce an output between 0 and 1. Shown below are the implementation of the codes for the output of a single neuron and the softmax function.\\
+
+\lstinputlisting[language=Python, firstline=46, lastline=62, breaklines=True]{digits.py}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+\noindent \textit{\textbf{Part 3 (a)}: Compute the gradient of the cost function with respect to the weight $w_{ij}$ and bias $b_{j}$}\\
+
+For a single image:\\
+$C= \mathop \sum \limits_{j = 1}^N {y_{j} \log p_{j}}$\\
+$p_{k} = \frac{e^{o_k}}{\sum \limits_{l = 1}^N e^{o_l}}$\\
+$o_j =  \mathop \sum \limits_{m = 1}^M w_{mj}+b_j$\\
+
+Taking the partial derivative of the cost with respect to the weight $w_{ij}$:\\
+$\frac{\partial C}{\partial w_{ij}} = - \mathop \sum \limits_{j = 1}^N \frac{\partial C}{\partial p_k} \frac{\partial p_k}{\partial o_j} \frac{\partial o_j}{\partial w_{ij}}$\\
+\\$\frac{\partial C}{\partial p_k} = \frac{y_k}{p_k}$\\
+\\if k = j\\
+$\frac{\partial p_k}{\partial o_j} = \frac{e^{o_j}}{\sum \limits_{l = 1}^N e^{o_l}} -  (\frac{e^{o_j}}{\sum \limits_{l = 1}^N e^{o_l}})^2$\\
+\phantom{$\frac{\partial p_k}{\partial o_j}$ }= $p_j - (p_j)^2$\\
+\phantom{$\frac{\partial p_k}{\partial o_j}$ }= $p_j(1-p_j)^2$\\
+\\if k $\neq$ j\\
+$\frac{\partial p_k}{\partial o_j} = 0 - \frac{e^{o_k}e^{o_j}}{\sum \limits_{l = 1}^N e^{o_l}}$\\
+\phantom{$\frac{\partial p_k}{\partial o_j}$ }= $-p_kp_j$\\
+\\$\frac{\partial o_j}{\partial w_{ij}} = x_i$\\
+\\$\frac{\partial C}{\partial w_{ij}} = -(\frac{y_0}{p_0} (-p_0p_j) + ... + \frac{y_j}{p_j} (p_j)(1-p_j) +... + \frac{y_N}{p_N} (-p_Np_j))x_i$\\
+\phantom{$\frac{\partial C}{\partial w_{ij}}$ }= $(y_0p_j + ... + y_j(p_j-1) + ... + y_Np_j)x_i$\\
+\phantom{$\frac{\partial C}{\partial w_{ij}}$ }= $(p_j(y_0 + ... + y_N) - y_j)x_i$\\
+\phantom{$\frac{\partial C}{\partial w_{ij}}$ }= $(p_j-y_j)x_i$\\
+
+For the entire training set m=1, ... , M, the gradient of the cost function with respect to weights $w_{ij}$\\
+
+$\nabla_{w_{ij}} C = \mathop \sum \limits_{m = 1}^M (p_j^{(m)} - y_j^{(m)})x_i^{(m)}$\\
+\phantom{$\nabla_{w_{ij}}$ }=$(P-Y)X^T$\\
+where P is the NxM prediction matrix, Y is the NxM one-hot matrix and X is the PxM matrix of input images. N refers to the number of output, M refers to the number input images and P is the number of pixels in an image.\\
+
+For a single image, taking the partial derivative of the cost with respect to the bias $b_{j}$:\\
+$\frac{\partial C}{\partial b_j} = - \mathop \sum \limits_{j = 1}^N \frac{\partial C}{\partial p_k} \frac{\partial p_k}{\partial o_j} \frac{\partial o_j}{\partial b_j}$\\
+\\$\frac{\partial o_j}{\partial b_j} = 1$\\
+\\$\frac{\partial C}{\partial b_j} = -(\frac{y_0}{p_0} (-p_0p_j) + ... + \frac{y_j}{p_j} (p_j)(1-p_j) +... + \frac{y_N}{p_N} (-p_Np_j))$\\
+\phantom{$\frac{\partial C}{\partial b_j}$ }= $(y_0p_j + ... + y_j(p_j-1) + ... + y_Np_j)$\\
+\phantom{$\frac{\partial C}{\partial b_j}$ }= $(p_j(y_0 + ... + y_N) - y_j)$\\
+\phantom{$\frac{\partial C}{\partial b_j}$ }= $(p_j-y_j)$\\
+
+For the entire training set m=1, ... , M, the gradient of the cost function with respect to the biases $b_j$\\
+
+$\nabla_{b_j} C = \mathop \sum \limits_{m = 1}^M (p_j^{(m)} - y_j^{(m)})x_i^{(m)}$\\
+\phantom{$\nabla_{b_j}$ }=$(P-Y)(1 ... 1)^T$\\
+
+where P is the NxM prediction matrix, Y is the NxM one-hot matrix and $(1 ... 1)^T$ is a vector of N "1". N refers to the number of output, M refers to the number input images and P is the number of pixels in an image.\\
+\clearpage
+
+\noindent \textit{\textbf{Part 3 (b)}: Write vectorized codes that compute the gradient of the cost function with respect to the weight $w_{ij}$ and bias $b_{j}$}\\
+
+The code for computing the gradient of the cost function with respect to the weights $w_{ij}$ and the biases $b_j$ is shown below\\
+
+\lstinputlisting[language=Python, firstline=66, lastline=85, breaklines=True]{digits.py}
+
+The gradient of the cost function with respect to both weights $w_{ij}$ and the biases $b_j$ can be approximated using finite differences. The code for implementing this approach is shown below.\\
+
+\lstinputlisting[language=Python, firstline=87, lastline=115, breaklines=True]{digits.py}
+
+Using h of 0.00001 and randomly generated input X, one-hot Y, weights and bias matricies, the results of the gradient with respect to weights and bias are shown below. Since the results generated usung the \textit{gradient} function and the \textit{finite\_difference} function are virtually identical, we conclude that the gradient function is correctly implemented.\\
+
+\begin{tcolorbox}
+The actual gradient with respect to weights is\\
+$[[$-0.36193322 -1.10805724 -0.4295545  -0.64038512 -0.90915913$]$\\
+ $[$-0.61200997  0.44645638 -0.51100466  0.0366156  -0.26232004$]$\\
+ $[$ 0.97394319  0.66160085  0.94055916  0.60376952  1.17147916$]]$\\
+Using finite difference, the estimated gradient with respect to weights is\\
+$[[$-0.36193322 -1.10805724 -0.4295545  -0.64038512 -0.90915913$]$\\
+ $[$-0.61200997  0.44645638 -0.51100466  0.0366156  -0.26232004$]$\\
+ $[$ 0.97394319  0.66160085  0.94055916  0.60376952  1.17147916$]]$\\
+The actual gradient with respect to bias is\\
+$[[$-0.85824383$]$\\
+ $[$-0.63481023$]$\\
+ $[$ 1.49305407$]]$\\
+Using finite difference, the estimated gradient with respect to bias is\\
+$[[$-0.85824383$]$\\
+ $[$-0.63481023$]$\\
+ $[$ 1.49305407$]]$
+\end{tcolorbox}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 4}: Training the basic neural network with "vanila" gradient descent}\\
+
+A basic neural network with no hidden layer was trained to classify the MNIST digits. The training set of images contains 48,000 images, while the validation set contains 12,000 images. The trained network would then be tested against a test set containing 10,000 images to verify its performance. To find the optimal initializations of the learning rate, a grid search was conducted. The weights matrix was initialized as an $N \times 784$ matrix of 0 since the network is small and there are no hidden layers. The biases was initialized as a vector of 1. The gradient descent algorithm would update the weights and biases at every iteration for a maximum of 5,000 iterations. The results of the grid search are shown below:\\
+
+\clearpage
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part4_Learning_Rate_Performance.png}
+    \caption{Classification accuracy vs learning rate}
+    \label{fig:Part4Perf}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part4_Learning_Rate_Cost.png}
+    \caption{Classification cost vs learning rate}
+    \label{fig:Part4Cost}
+\end{figure*}
+\clearpage
+
+From the grid search, it was observed that using a learning rate of 0.000005 would generate the best accuracy and lowest cost. Using the optimal learning rate of 0.000005, the final results of the network's performance are shown below. Classification accuracy for both the training and validation images climbed above 90\% after approximately 750 iterations of gradient descent. After 1000 iterations, both classification accuracy and cost exhibit small gradual improvements. The final classification accuracies are over 90\% for the training, validation and test images.\\
+
+\begin{tcolorbox}
+Final Training Set Performance: 0.927742473174\\
+Final Training Set Cost: 12607.4046517\\
+Final Validation Set Performance: 0.918284048313\\
+Final Validation Set Cost: 3380.84023078\\
+Final Test Set Performance: 0.9221\\
+Final Test Set Cost: 2727.79293586
+\end{tcolorbox}
+
+\clearpage
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part4_Final_Performance.png}
+    \caption{Classification accuracy vs iterations}
+    \label{fig:Part4FinalPerf}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part4_Learning_Rate_Cost.png}
+    \caption{Classification cost vs iterations}
+    \label{fig:Part4FinalCost}
+\end{figure*}
+\clearpage
+
+The weights connecting the input layer to the output layer are shown below. Each of the weight clearly resembles each of the 10 digits. These weights are extracted at the end of gradient descent.\\
+
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit0.jpg}
+  \caption{Weight for digit 0}
+  \label{fig:dig0}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit1.jpg}
+  \caption{Weight for digit 1}
+  \label{fig:dig1}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit2.jpg}
+  \caption{Weight for digit 2}
+  \label{fig:dig2}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit3.jpg}
+  \caption{Weight for digit 3}
+  \label{fig:dig3}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit4.jpg}
+  \caption{Weight for digit 4}
+  \label{fig:dig4}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit5.jpg}
+  \caption{Weight for digit 5}
+  \label{fig:dig5}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit6.jpg}
+  \caption{Weight for digit 6}
+  \label{fig:dig6}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit7.jpg}
+  \caption{Weight for digit 7}
+  \label{fig:dig7}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit8.jpg}
+  \caption{Weight for digit 8}
+  \label{fig:dig8}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4_digit9.jpg}
+  \caption{Weight for digit 9}
+  \label{fig:dig9}
+\end{subfigure}%
+\caption{Visualizations of the weights connected to the output layer}
+\label{fig:pcs}
+\end{figure*}
+
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 5}: Training the basic neural network with momentum gradient descent}\\
+
+Momentum gradient descent was implemented to help improve the speed of gradient computation in the network. Using momentum gradient descent would help to accerlerate gradient computation in the right direction. In every iteration of the momentum gradient descent, the gradient would be updated according to the formulas below:\\
+
+$v = \gamma v + \alpha \frac{\partial C}{\partial W}$\\
+$W = W - v$\\
+
+where $\gamma$ is the momentum term and is set to 0.9 in our implementation of the momentum gradient descent. The learning rate was set at 0.000005 as in part 4. The code for implementing momentum gradient descent is shown below:\\
+
+\lstinputlisting[language=Python, firstline=328, lastline=354, breaklines=True]{digits.py}
+
+The use of momentum gradient descent helped improved the speed of convergence in the computation of the gradient as compared to the "vanilla gradient descent". There is a slight improvememt to performance of the digit classification as well. The final performance of the network is shown below. \\
+
+\begin{tcolorbox}
+Final Training Set Performance: 0.938056047505\\
+Final Training Set Cost: 10850.963966\\
+Final Validation Set Performance: 0.91928363182\\
+Final Validation Set Cost: 3378.91846084\\
+Final Test Set Performance: 0.9243\\
+Final Test Set Cost: 2727.15554639
+\end{tcolorbox}
+
+\clearpage
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part5_Final_Performance.png}
+    \caption{Classification accuracy vs iterations}
+    \label{fig:Part5FinalPerf}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part5_Final_Cost.png}
+    \caption{Classification cost vs iterations}
+    \label{fig:Part5FinalCost}
+\end{figure*}
+\clearpage
+
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 6}: Demonstration of momentum gradient descent}\\
+
+\begin{figure*}[h!]
+    \includegraphics[width=90mm]{"Part 6(b)(c) Contour Plot".png}
+    \includegraphics[width=90mm]{"Part 6(a) Contour Plot".png}
+    \caption{Contour plot for the centre 2 weights with and without trajectories}
+    \label{fig:p6}
+\end{figure*}
+
+\textbf{part6(d)}\\
+As we can see from the trajectory of the vanilla gradient descent, the gradient is of high curvature. Hence the the vanilla gradient descent oscillate a lot. However, the momentum gradient descent of these high curvature directions cancel each other out and hence provided a more stable progression towards the local minimum. \\
+
+\textbf{part6(e)}\\
+The learning rate for the vanilla gradient descent was set to $0.0026$, the learning rate for the momentum gradient descent was $0.0034$, $k$ (number of iterations) was set to $15$. If the learning rate for the momentum gradient descent was too low, the same as vanilla $0.0026$ for example, the progression will be too slow to visualize, since the momentum canceled out the oscillation. All the points will be really close to each other. Hence in order to visualize the how momentum stablize the gradient desecnt, we need to increase the learning rate. Another bad example would be if we set both learning rate too low or too high, the points will be either really close to each other that we can't observe the differences, or the gradient descent will be oscillating too much. The learning rates combining with $k$ in part 6(c) and (d) were tested to fit the width and height for the graph the best.\\
+
+\textit{Note: The weights used in this visualization were obtained before the introduction of random seed in the code. Hence reproducing the csv files in part 5 would generate different plots as shown above}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 7}: Comparing Backpropagation versus computing the gradient with respect to each weight}\\
+
+Assuming a network with N layers, K neurons per hidden layer and M outputs for the last layer. For simplicity, let's assume M $\approx$ K. Starting from the last layer, the gradient of the Cost with respect to each weight is:\\
+
+$\frac{\partial C}{\partial w^{(N,j,k)}} = \frac{\partial C}{\partial o_k} \frac{\partial o_k}{\partial w^{(N,j,k)}}$\\
+where $i = 1 , ... , N$ and $j, k = 1 , ... , K$\\
+
+Assuming the computation of a partial derivative takes constant time, or $O(1)$ complexity, The above calculation would be $O(2)\approx O(1)$. Hence, computing the gradient of the cost function with respect to every weight in the layer will take $O(M) \approx O(K)$.\\
+
+For the second last layer, the gradient of the Cost with respect to every weight is:\\
+
+$\frac{\partial C}{\partial w^{(N-1,j,k)}} = \frac{\partial C}{\partial o_1} \frac{\partial o_1}{\partial \partial h_{N-1,j}} \frac{\partial h_{N-1,j}}{\partial w^{(N-1,j,k)}} + ... + \frac{\partial C}{\partial o_M} \frac{\partial o_M}{\partial \partial h_{N-1,j}} \frac{\partial h_{N-1,j}}{\partial w^{(N-1,j,k)}}$\\
+\phantom{$\frac{\partial C}{\partial w^{(N-1,j,k)}}$ }= $(\sum \limits_{l = 1}^M \frac{\partial C}{\partial o_l} \frac{\partial o_l}{\partial \partial h_{N-1,j}} \frac{\partial h_{N-1,j}}{\partial w^{(N-1,j,k)}}) \frac{\partial h_{N-1,j}}{\partial w^{(N-1,j,k)}}$\\
+
+Hence, the computation of the gradient with respect to each weight would be $O(M) \approx O(K)$. Since there are K neurons in this layer, the computation of the gradient with respect to each weight for the entire layer would be $O(K^2)$.\\
+
+For the thrid last layer, the gradient of the Cost with respect to every weight is:\\
+
+$\frac{\partial C}{\partial w^{(N-2,j,k)}} = (\sum \limits_{j=1}^M (\sum \limits_{l=1}^M \frac{\partial C}{\partial o_l} \frac{\partial o_l}{\partial \partial h_{N-1,j}}) \frac{\partial h_{N-1,j}}{\partial h_{N-2,j}}) \frac{\partial h_{N-2,j}}{\partial w^{(N-2,j,k)}}$\\
+
+Hence, the computation of the gradient with respect to each weight individually would be $O(M*K) \approx O(K^2)$. Since there are K neurons in this layer, the computation of the gradient with respect to each weight individually for the entire layer would be $O(K^3)$.\\
+
+Following this trend, we note that for an N layer network, the computation of the gradient with respect to each weight individually would be approximately $O(K^N)$\\
+
+On the other hand, let us now consider a fully vectorized backpropagation algorithm that stores the gradient of the weight at every layer. Once again, we assume that the number of outputs, M, is approximately to the number of neurons, K, at each layer for simplicity. At every layer $N, N-1, ... , 2$ backpropagation algorithm, we compute:\\
+
+$\delta^l = ((w^{l+1})^T \delta^{l+1}) \odot \sigma ' (z^l)$\\
+
+where $\delta^l$ is the $K \times 1$ matrix containing the error of all K neurons in l layer, $w^{l+1}$ is the $K \times K$ matrix of weights in the l layer, $\odot$ is the element-wise product, also known as Hadamard product, $\sigma$ is the activation function and $z^l = w^la^{l-1} + b^l$. $a^{l-1}$ is the activation from the pevious layer and $\sigma ' (z^l)$ is a $K \times 1$ matrix. Hence, the computation of $\delta^l$ produces a $K \times K$ output matrix and has $O(K^3)$ complexity.\\
+
+The gradient of the cost with respect to each weight is computed as follows:\\
+
+$\frac{\partial C}{\partial w^{l,j,k}} = a^{l-1,k} \delta^{l,j}$\\
+
+Since there are $K^2$ weights in every layer, the computation of the gradient of the cost with repect to weight will have $O(K^2)$ complexity. The most computationally expensive step of backpropagration takes $O(K^3)$, hence backpropagation has complexity of $O(K^3)$, which is significantly less expensive as compared to computing the gradient with respect to each weight individually for a network with 4 or more layers.
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 8}: Facial classification with single-hidden layer}\\
+
+We will now perform the task of facial classification with a single-hidden layer with Pytorch for the following actors/actresses: Lorraine Bracco, Peri Gilpin, Angie Harmon, Alec Baldwin, Bill Hader and Steve Carell. The images were obtained from facescrub, and the URLs used to download the images are contained in the files \textbf{facescrub\_actors.txt} and \textbf{facescrub\_actresses.txt}. Bad images were removed by comparing the SHA-256 codes of the images with the SHA-256 codes provided in the files \textbf{facescrub\_actors.txt} and \textbf{facescrub\_actresses.txt} . 70 images were used from each actor as training images, with the exception of Peri Gilpin where we used 37 images. This was due to insufficient images available for Peri Gilpin. For each actor, 10 images were included in the validation set and 10 images were used for the test set. The images were converted into greyscale and resized to size 64 by 64. We observed that using size 64 by 64 images provided better results as compared to using size 32 by 32 images. Gradient descent was optimized using the Adam optimizer and using mini-batches of training images.  Experiments were conducted to find the optimal learning rate, mini-batch size, number of hidden neurons and activation function. Shown below are the range of parameters that were tried:\\
+
+Learning rates: 0.01, 0.001 and 0.0001\\
+Number of Hidden Units: 64, 128, 512, 1024 and 4096\\
+Mini-batch size: 32, 64, 128\\
+Activation function: ReLU, Tanh\\
+
+The optimal network uses a learning rate of 0.0001, 128 hidden units, mini-batch size of 128 and the ReLU activation function. Shown below is the performance of the network:\\
+
+\begin{tcolorbox}
+Final Training Set Performance: 1.0\\
+Final Validation Set Performance: 0.75\\
+Final Test Set Performance: 0.8
+\end{tcolorbox}
+
+\clearpage
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part8_Performance.png}
+    \caption{Classification accuracy vs iterations}
+    \label{fig:Part8FinalPerf}
+\end{figure*}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 9
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 9}: Visualizations of the hidden layer weights}\\
+
+For this section, we will visualize the weights of the hidden layer that are most useful for classifying input photos for the actor Steve Carell and actress Lorraine Bracco. The three most useful hidden weights for each actor will be visualized. 
+
+\begin{figure*}[h!]
+    \includegraphics[width=80mm]{hidden2output_bracco.png}
+    \includegraphics[width=80mm]{hidden2output_carell.png}
+    \caption{Weights for the connection from hidden layer to output for Bracco and Carell}
+    \label{fig:p9a}
+\end{figure*}
+
+We extracted the weights from the hidden layer to the output and picked the hidden units corresponding to the 3 most significant weights, since these weights indicated that the corresponding units contributed the most to the output. Since we used one-hot decoding for the output, by selecting Bracco and Carell seperately, each connection from hidden layer to Bracco and Carell is just simply a linear combination, which can be visualized as above. The following are the visualizaion for the useful hidden units.
+
+\begin{figure*}[h!]
+    \includegraphics[width=30mm]{Part9_weights_bracco_1.jpg}
+    \includegraphics[width=30mm]{Part9_weights_bracco_2.jpg}
+    \includegraphics[width=30mm]{Part9_weights_bracco_3.jpg}
+    \caption{The 3 most useful hidden units for detecting Bracco}
+    \label{fig:p9b1}
+\end{figure*}
+\begin{figure*}[h!]
+    \includegraphics[width=30mm]{Part9_weights_carell_1.jpg}
+    \includegraphics[width=30mm]{Part9_weights_carell_2.jpg}
+    \includegraphics[width=30mm]{Part9_weights_carell_3.jpg}
+    \caption{The 3 most useful hidden units for detecting Carell}
+    \label{fig:p9b2}
+\end{figure*}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 10
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 10}: Facial Classification with AlexNet}\\
+
+AlexNet, a convolutional neural network, was used to perform facial classification for the same actors and actresses. For this task, we used rgb coloured version of the original images and resized them to 227 by 227 by 3. As with part 8, 70 images were used from each actor as training images, with the exception of Peri Gilpin where we used 37 images. For each actor, 10 images were included in the validation set and 10 images were used for the test set.\\
+
+To extract the values of the activations of AlexNet after the $4th$ convolution layer, we set the features for AlexNet to only contain the first 4 layers, and define the forward function to only run the features. Hence when we input the images to AlexNet and run forward, the output will be the activations from the $4th$ convolution layer.\\
+
+\begin{figure*}[h!]
+    \includegraphics[width=150mm]{"Part10_Performance".png}
+    \caption{Performance of the full connection after AlexNet}
+    \label{fig:p10}
+\end{figure*}
+
+We used the same system as part 8, but set all the inputs from the training, validation and the test set to run through our MyAlexNet (only includes the first 4 convolution layer from AlexNet), and let the output of these to be the input of the system from part 8. In addition, we changed the dimension of the input to 9217 ($256*6*6+1$). We experimented with different parameters and found that the optimal parameters are as follows:\\
+
+Learning rate: 0.0001\\
+Number of hidden units: 64\\
+Mini-batch size: 128\\
+Activation function: ReLU\\
+
+As we can see from the above figure, AlexNet vastly outformed the single hidden-layer network used in part 8. The final performance of the AlexNet is shown below:\\
+
+\begin{tcolorbox}
+Final Training Set Performance: 1.0\\
+Final Validation Set Performance: 0.95\\
+Final Test Set Performance: 0.933333333333
+\end{tcolorbox}
+
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\end{document}

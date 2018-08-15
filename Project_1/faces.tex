@@ -1,0 +1,918 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{subcaption}
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{tcolorbox} % Use for boxes
+\usepackage{hyperref} % Use for URL
+\usepackage{amsmath} % Used for matrices
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassTime): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+\setcounter{homeworkProblemCounter}{-1}
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#$1$} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ January\ 29,\ 2018} % Due date
+\newcommand{\hmwkClass}{CSC411} % Course/class
+\newcommand{\hmwkClassTime}{L0101} % Class/lecture time
+\newcommand{\hmwkAuthorName}{Xin Jie Lee} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+%\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+\clearpage
+%----------------------------------------------------------------------------------------
+%	PREFIX: Code
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[Prefix]
+
+The code for this project is written in Python 3.6 using Anaconda 3 interpreter.
+
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+
+\noindent \textit{Dataset description}\\
+
+This project involved the building of a system for face recognition and gender classification. The images used in building this system were obtained from FaceScrub, and a total of 1675 images for 12 actors and actresses were obtained. The actors and actresses whose images we would be working with are as follows: Alec Baldwin, America Ferrera, Angie Harmon, Bill Hader, Daniel Radcliffe, Fran Drescher, Gerard Butler, Kristin Chenoweth, Lorraine Bracco, Michael Vartan, Peri Gilpin and Steve Carell. The URLs used to download the images are contained in the files \textbf{facescrub\_actors.txt} and \textbf{facescrub\_actresses.txt}. Figure 1 depicts samples of the original images for each of the actors and actresses.
+
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/baldwin0.jpg}
+  \caption{Alec Baldwin.}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/ferrera0.jpg}
+  \caption{America Ferrera.}
+  \label{fig:sfig2}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/harmon0.jpg}
+  \caption{Angie Harmon.}
+  \label{fig:sfig3}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/hader0.jpg}
+  \caption{Bill Hader.}
+  \label{fig:sfig4}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/radcliffe0.jpg}
+  \caption{Daniel Radcliffe.}
+  \label{fig:sfig5}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/drescher0.jpg}
+  \caption{Fran Drescher.}
+  \label{fig:sfig6}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/butler0.jpg}
+  \caption{Gerard Butler.}
+  \label{fig:sfig7}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/chenoweth0.jpg}
+  \caption{Kristin Chenoweth.}
+  \label{fig:sfig8}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/bracco0.jpg}
+  \caption{Lorraine Bracco.}
+  \label{fig:sfig9}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/vartan0.jpg}
+  \caption{Michael Vartan.}
+  \label{fig:sfig10}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/gilpin0.jpg}
+  \caption{Peri Gilpin.}
+  \label{fig:sfig11}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{uncropped/carell0.jpg}
+  \caption{Steve Carell.}
+  \label{fig:sfig12}
+\end{subfigure}%
+\caption{}
+\label{fig:pcs}
+\end{figure*}
+
+These images in Figure 1 were obtained by running \textbf{get\_data.py}.\\
+
+These images have to be processed before they could be used for training and testing. The first step of processing involved cropping out the faces of the images. Each line in the \textbf{facescrub\_actors.txt} and \textbf{facescrub\_actresses.txt} files contains the bounding box information for the location of the person's face in the format of $x1$,$y1$,$x2$,$y2$, where ($x1$,$y1$) is the coordinate of the top-left corner of the bounding box and ($x2$,$y2$) is that of the bottom-right corner. Assuming the image is represented as a Python NumPy array $I$, a face in $I$ can be obtained as $I[y1:y2, x1:x2]$. For example, the following line in \textbf{facescrub\_actors.txt} contains the bounding box $463$, $450$, $1785$, $1772$, and the face in this image can be obtained as $I[450:1772, 463:1785]$
+\begin{tcolorbox}
+Alec Baldwin	3209	1862	\url{http://sarcastic-news.com/wp-content/uploads/2013/11/Alec_Baldwin_PETA_Shankbone_2008.jpg}	463,450,1785,1772
+\end{tcolorbox}
+These cropped images were converted to greyscale (\textbf{rgb2gray.py} and \textbf{get\_data.py}) and resized to 32 by 32 (\textbf{get\_data.py}). Figure 2 depicts the final processed version of the images from Figure 1.
+
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/baldwin0.jpg}
+  \caption{Alec Baldwin.}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/ferrera0.jpg}
+  \caption{America Ferrera.}
+  \label{fig:sfig2}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/harmon0.jpg}
+  \caption{Angie Harmon.}
+  \label{fig:sfig3}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/hader0.jpg}
+  \caption{Bill Hader.}
+  \label{fig:sfig4}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/radcliffe0.jpg}
+  \caption{Daniel Radcliffe.}
+  \label{fig:sfig5}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/drescher0.jpg}
+  \caption{Fran Drescher.}
+  \label{fig:sfig6}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/butler0.jpg}
+  \caption{Gerard Butler.}
+  \label{fig:sfig7}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/chenoweth0.jpg}
+  \caption{Kristin Chenoweth.}
+  \label{fig:sfig8}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/bracco0.jpg}
+  \caption{Lorraine Bracco.}
+  \label{fig:sfig9}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/vartan0.jpg}
+  \caption{Michael Vartan.}
+  \label{fig:sfig10}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/gilpin0.jpg}
+  \caption{Peri Gilpin.}
+  \label{fig:sfig11}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/carell0.jpg}
+  \caption{Steve Carell.}
+  \label{fig:sfig12}
+\end{subfigure}%
+\caption{}
+\label{fig:pcs}
+\end{figure*}
+
+However, there were some processed images that do not depict any person's face or the entirety of a person's face. Examples of these are shown in Figure 3. Since the elimination of inaccurate images would help to improve the performance of the program, steps were taken to remove these bad images. These badly processed images are usually the result of inaccurate bounding boxes provided in the \textbf{facescrub\_actors.txt} and \textbf{facescrub\_actresses.txt} files. Most of these bad bounding boxes seem to be present in duplicate images in the original dataset. Hence, many of these badly processed images could be removed by checking for duplicate images. Duplicate images were detected by comparing their SHA-256 hash codes (lines 47-52 and lines 101-115 of \textbf{get\_data.py}). When duplicate images are detected, only the latest copy was kept while earlier copies were deleted. This approach helped eliminated a vast majority of the badly processed images, however the downside to this method was that it greatly reduced the number of images available for training and testing.  For example, there were only a total of 86 images available for the actress Peri Gilpin after the elimination of all duplicate images. There were over 100 images available for each of the other actors and actresses. Finally, the processed images are stored in two seperate folders, one for each gender.
+
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/carell91.jpg}
+  \caption{An image that does\\ not capture Carell's face.}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/bracco87.jpg}
+  \caption{An image that does\\ not capture Bracco's face.}
+  \label{fig:sfig2}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/female/drescher121.jpg}
+  \caption{An image containing\\ part of Drescher's face.}
+  \label{fig:sfig3}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{cropped/male/hader95.jpg}
+  \caption{An image containing\\ part of Hader's face.}
+  \label{fig:sfig4}
+\end{subfigure}%
+\caption{}
+\label{fig:pcs}
+\end{figure*}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+\noindent \textit{Separate the dataset into three non-overlapping parts: the training set, the validation set, and the test set}\\
+
+The training, validation and training inputs are generated seperatey from the labels. The function \texttt{preprocess\_images} creates the matrices containing the training, validation and test images for an individual. The processed images for the corresponding individual were loaded into an array \texttt{images} from the corresponding folder, \texttt{cropped/male} for actors and \texttt{cropped/female} for actresses. The array \texttt{images} was then shuffled and each image was converted into a numpy matrix and flattened into a vector. The image vector would be normalized by dividing every number in the vector by 255 since the pixel intensity of a greyscale image ranges from 0 to 255. This procedure ensured that every input number in the vector ranges from 0 to 1. A bias constant of 1 is then added to the front of every image vector. In total, an image vector will contain 1025 float variables, 1 variable for the bias unit and 1024 variables for the pixels in the image.\\
+
+For parts 3 and 4 of this project, the training set would hold 100 images, while both the validation and test sets contained 10 images each. The shuffling of the array \texttt{images} ensured that different images would be loaded into the various input sets each time the function \texttt{preprocess\_images} was ran. For parts 5 to 8 of the project, insufficient images avaliable for the actress Peri Gilpin (86 images in total) meant that only 66 images were used for the training set, while the validation and test sets still kept 10 images each. The function \texttt{preprocess\_input\_sets} would create the aggregate training, validation and test input matrices for all the actors and actresses needed for each part of the project.\\
+
+For parts 3 and 4 of the project, the function \texttt{preprocess\_labels\_two} was used to create the output training, validation and test labels. Images for Alec Baldwin would be assigned the output value of $y=1$, while images for Steve Carell would be assigned the value of $y=-1$. For part 5 of the project, images for female actresses were assigned the output value of $y=1$, while images for male actors were assigned the output value of $y=-1$. For parts 7 and 8, the function \texttt{preprocess\_labels\_multi} would be used to generate the output labels in the following format:\\
+
+Lorraine Bracco = [1, 0, 0, 0, 0, 0]\\
+Peri Gilpin = [0, 1, 0, 0, 0, 0]\\
+Angie Harmon = [0, 0, 1, 0, 0, 0]\\
+Alec Baldwin= [0, 0, 0, 1, 0, 0]\\
+Bill Hader = [0, 0, 0, 0, 1, 0]\\
+Steve Carell = [0, 0, 0, 0, 0, 1]\\
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+\noindent \textit{Build a classifier to distinguish pictures of Alec Baldwin from pictures of Steve Carell}\\
+
+Linear Regression will be used to build the classifier to distinguish pictures between Alec Baldwin and Stevel Carell. The parameters for the linear regression model will be computed iteratively using gradient descent, and the goal will be to find the parameters $\Theta$ that best minimize the cost function:\\
+
+$J ( \theta ) = \frac{1}{{2m}}\mathop \sum \limits_{i = 1}^m {( {{h_\Theta } ( {{X^{(i)}}} ) - {Y^{(i)}}} )^2}$\\
+where\\
+
+$h_\Theta ( {{X^{(i)}}} ) = \mathop \sum \limits_{j = 0}^n X_j^{(i)}{\theta _j}$\\
+
+The cost function measures the average error between the predicted and actual outputs, and the lower the cost function, the lower the average error will be. A lower average error will ensure that the predictions are more accurate. Every iteration of gradient descent will update the parameters using the formula:\\
+
+$\Theta_{k} = \Theta_{k-1} - \alpha \nabla J(\Theta_{k-1})$\\
+
+where\\
+
+$\nabla J(\Theta_{k-1}) = \frac{1}{{m}}\mathop \sum \limits_{i = 1}^m {( {{h_{\Theta_{k-1}} } ( {{X^{(i)}}} ) - {Y^{(i)}}} )X^{(i)}}$\\
+
+and $\alpha$ is the learning rate to be optimized, $X$ is the input matrix of the images, $Y$ is the matrix containing the output labels identifying the actors/actress in the images, $m$ refers to the total number of images and $\Theta$ is the vector of the parameters. For this part of the project, images for Alec Baldwin were assigned labels of $1$ while images for Steve Carell were assigned labels of $-1$.\\
+
+Before running the gradient descent algorithm, the parameters $\Theta$ have to be initialized. The initial paramters were initialized as $0$ since $0$ is the midpoint between $-1$ and $1$, which is the range of most optimized $\theta$. A grid search was carried out to find the optimal learning rate $\alpha$. It was noticed that if the chosen $\alpha$ was too large, the system would fail as a result of encountering an overflow in computing the cost function. This was likely the result of cost function growing too large. The gradient descent would update the paramters $\Theta$ untill the difference between the previous parameters and the current parameters is less than $e^{-5}$ or the algorithm reached the predefined maxium number of iterations. The grid search for the optimal $\alpha$ was carried out with $4$ different number of maximum iterations: $1,000$, $5,000$, $10,000$ and $20,000$. The figues shown below highlight the results of the grid search.
+\clearpage
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Performances1000iterations.png}
+    \caption{Plot of training and validation performance vs learning rate for maximum of 1,000 iterations}
+    \label{fig:1000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Cost1000iterations.png}
+    \caption{Plot of training and validation cost vs learning rate for maximum of 1,000 iterations}
+    \label{fig:100cost}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Performances5000iterations.png}
+    \caption{Plot of training and validation performance vs learning rate for maximum of 5,000 iterations}
+    \label{fig:5000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Cost5000iterations.png}
+    \caption{Plot of training and validation cost vs learning rate for maximum of 5,000 iterations}
+    \label{fig:5000cost}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Performances10000iterations.png}
+    \caption{Plot of training and validation performance vs learning rate for maximum of 10,000 iterations}
+    \label{fig:10000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Cost10000iterations.png}
+    \caption{Plot of training and validation cost vs learning rate for maximum of 10,000 iterations}
+    \label{fig:10000cost}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Performances15000iterations.png}
+    \caption{Plot of training and validation performance vs learning rate for maximum of 15,000 iterations}
+    \label{fig:15000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part3_Learning_Rate_Cost15000iterations.png}
+    \caption{Plot of training and validation cost vs learning rate for maximum of 15,000 iterations}
+    \label{fig:15000cost}
+\end{figure*}
+\clearpage
+
+The code for computing the output of the classifier and measuring the accuracy of the predicted output against the actual output label is shown below:\\
+
+\lstinputlisting[language=Python, firstline=172, lastline=184, breaklines=True]{faces.py}
+
+In the code, thetas refer to the $\Theta$ matrix, while inputs refer to transpose of the $X$ matrix (matrix of images) and labels refer to the transpose of the $Y$ matrix (matrix of labels). The predicted output would be the result obtained from the multiplication of $\Theta^{T}X$, where $\Theta$ is the final optimized parameters and $X$ is the matrix containing the images. In the code, the prediction is computed in line 5. Images in the validation set will be classified as belonging to Alec Baldwin if their predicted output label is closer to $1$, or belonging to Steve Carell if their predicted output label is closer to $-1$.\\
+
+Based on the results from the grid search, a learning rate of $0.005$ was selected. In addition. the maximum number of iterations for the gradient descent algorithm was set to $10,000$. These selections generated relatively good performance and low cost (average error) for the training and validation sets.
+\begin{tcolorbox}
+Results for chosen learning rate of 0.005 and maximum number of iterations of 10,000\\
+Training Performance: 100.0 \% \\
+Validation Performance: 95.0 \% \\
+Training Cost: 0.0223267253767 \\
+Validation Cost: 0.102806329233
+\end{tcolorbox}
+
+\textit{Note: Performance of the model will vary slighlty each time the model is run}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 4 (a)}: Visualizing parameters $\Theta$ using full training dataset vs training dataset of 2 images}\\
+
+The following greyscale images of the paramaters $\Theta$ were obtained by training the model with 2 training images. The faces of the actors are discernabile in these images, which is likely the result of the images capturing all of the details and noise of the 2 training images used to generate the parameters. Hence, the use of a small number of training images will result in overfiting of the model, as the model will fit all of the details and noise of the images relatively well\\
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4a_2_training_set_Baldwin.jpg}
+  \caption{Parameters for Alec Baldwin\\ using 2 training images.}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4a_2_training_set_Carell.jpg}
+  \caption{Parameters for Steve Carell\\ using 2 training images.}
+  \label{fig:sfig2}
+\end{subfigure}%
+\end{figure*}
+
+Running the model on the full training dataset of 100 images helped reduced the amount of overfitting in the parameters $\Theta$. As expected, the actors' faces were less discernable in the images of the parameters.\\
+
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4a_100_training_set_Baldwin.jpg}
+  \caption{Parameters for Alec Baldwin\\ using 100 training images.}
+  \label{fig:sfig3}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4a_100_training_set_Carell.jpg}
+  \caption{Parameters for Steve Carell\\ using 100 training images.}
+  \label{fig:sfig4}
+\end{subfigure}%
+\end{figure*}
+
+\noindent \textit{\textbf{Part 4 (b)}: Visualizing parameters $\Theta$ after 20,000 iterations of gradient descent vs 50 iterations}\\
+
+The following images below are visualizations of the parameters $\Theta$ using the full training dataset and running the gradient descent algorithm for a maximum of 50 iterations. These images closely resemble the faces of their respective actor, and it is apparent that overfitting is present in the model.\\
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4b_50_iter_Baldwin.jpg}
+  \caption{Parameters for Alec Baldwin\\ after 50 iterations.}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4b_50_iter_Carell.jpg}
+  \caption{Parameters for Steve Carell\\ after 50 iterations.}
+  \label{fig:sfig2}
+\end{subfigure}%
+\end{figure*}
+
+Running the gradient descent algorithm for 20,000 iterations certainly decreased the amount of overfitting in the paramters $\Theta$, and the actors' faces were far less discernable in the images.\\
+
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4b_20000_iter_Baldwin.jpg}
+  \caption{Parameters for Alec Baldwin\\ after 50 iterations.}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part4b_20000_iter_Carell.jpg}
+  \caption{Parameters for Steve Carell\\ after 50 iterations.}
+  \label{fig:sfig2}
+\end{subfigure}%
+\end{figure*}
+
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{Gender classification and overfitting}\\
+
+For this part of the project, the model will be trained to classify the gender of the person depicted in the images. The training of the model will be carried out on images from these 6 actors/actresses: Lorraine Bracco, Peri Gilpin, Angie Harmon, Alec Baldwin, Bill Hader and Steve Carell. These actors/actresses will be referred to as known actors/actresses for the purpose of this report. The trained model will then be tested on images from 6 other actors/actresses: Fran Drescher, America Ferrera, Kristin Chenoweth, Gerard Butler, Daniel Radcliffe and Michael Vartan. These actors/actresses will be refered to as unknown actors/actresses, and 30 images of each unknown actor/actress will be used to test the model. In addition, the model will be trained on datasets of 5, 10, 15, ... , 60, 65 images from each known actor/actress to demonstrate the effects of overfitting. Images for female actesses will be given a label of $y=1$ while images for male actors will be given a label of $y=-1$. Hence, if the predicted output for a test image is closer to 1, the person in the image will be classified as female. On the other hand, if the predicted output of a test image is closer to -1, the person in the image will be classified as male. Shown below are the results of the models:\\
+\clearpage
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part6_Training_validation.png}
+    \caption{Plot of training and validation performance vs training set size for the 6 known actors/actresses}
+    \label{fig:6known}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part6_Unknown_Test.png}
+    \caption{Plot of validation performance vs training set size for the 6 unknown actors/actresses}
+    \label{fig:6unknown}
+\end{figure*}
+\clearpage
+Running the model on smaller training dataset certainly resulted in a greater amount of overfitting which led to poorer performance. The test performance on images from the 6 unknown actors/actress is relatively poor ($<80\%$) when using training sets of 10 images or less. Performance generally improved as the size of the training set increased, since overfiiting became less of an issue when more training data were used.\\
+
+Using a training dataset of 65 images from each known actor/actress produced the following results when tested against test images from the 6 known actors/actresses.
+\begin{tcolorbox}
+Final results of gender classification for known actors/actresses\\
+Training Performance: 98.9743589744 \% \\
+Validation Performance: 91.6666666667 \%
+\end{tcolorbox}
+
+The result of testing the same model on 30 images from each unknown actor/actress produced the following result:
+\begin{tcolorbox}
+Final result of gender classification for unknown actors/actresses\\
+Classification Performance: 85.5555555556 \% 
+\end{tcolorbox}
+
+\textit{Note: Performance of the model will vary slighlty each time the model is run}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{\textbf{Part 6 (a)}: Partial derivative of cost function with respect to $\theta_{pq}$}\\
+
+The cost function is:\\
+$J(\Theta)=\sum_{i=1}^m(\sum_{j=1}^k(\Theta^Tx^{(i)}-y^{(i)})_j^2)$\\
+
+where $m$ is the total number of images and $k$ is the total number of labels.\\
+
+The partial derivative of the cost function with respect to $\theta_{pq}$ (where $p$ refers to the $(p-1)^{th}$ pixel if $p>1$ or the bias unit if $p=1$ and q refers to the $q^{th}$ label) is:\\
+
+$\frac{\partial J(\Theta)}{\partial\theta_{pq}}=2\sum_{i=1}^m(\Theta_q^Tx^{(i)}-y^{(i)})_j\frac{\partial J(\Theta)}{\partial\theta_{pq}}(\Theta^Tx^{(i)}-y^{(i)})_j$\\
+\phantom{$\frac{\partial J(\Theta)}{\partial\theta_{pq}}$ }$=2\sum_{i=1}^m(\Theta_q^Tx^{(i)}-y^{(i)})_jx_p^{(i)}$\\
+
+\textit{Note}:\\
+
+$\frac{\partial J(\Theta)}{\partial\theta_{pq}}(\Theta^Tx^{(i)}-y^{(i)})_j=\frac{\partial J(\Theta)}{\partial\theta_{pq}}(\theta_{1j}x_1^{(i)} + \theta_{2j}x_2^{(i)} + ... + \theta_{nj}x_n^{(i)})$\\
+\phantom{$\frac{\partial J(\Theta)}{\partial\theta_{pq}}(\Theta^Tx^{(i)}-y^{(i)})_j$ }$=x_p^{(i)}$\\
+and\\
+$\Theta_q$ refers to the $q^{th}$ column of $\Theta$ matrix or the $q^{th}$ row of the $\Theta^T$ matrix. \\
+
+\noindent \textit{\textbf{Part 6 (b)}: Gradient of cost function for classification of mutiple labels}\\
+
+From 6 (a):\\
+$\Theta_q^Tx^{(i)} =$
+\[
+\begin{bmatrix}
+\theta_{1q} & \theta_{2q} & \dots  & \theta_{nq}
+\end{bmatrix}
+\begin{bmatrix}
+x_1^{(i)} \\
+x_2^{(i)} \\
+\vdots  \\
+x_n^{(i)}
+\end{bmatrix}
+\]
+\phantom{$\Theta_q^Tx^{(i)}$}$=\theta_{1q}x_1^{(i)} + \theta_{2q}x_2^{(i)} + \dots + \theta_{nq}x_n^{(i)}$ \\
+\phantom{$\Theta_q^Tx^{(i)}$}$=\sum_{l=1}^n\theta_{lq}x_l^{(i)}$ \\
+
+Hence,\\
+
+$\frac{\partial J(\Theta)}{\partial\theta_{pq}} = 2\sum_{i=1}^m(\Theta_q^Tx^{(i)}-y^{(i)})_jx_p^{(i)}$\\
+\phantom{$\frac{\partial J(\Theta)}{\partial\theta_{pq}}$ }$= 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{lq}x_l^{(i)}-y^{(i)})_jx_p^{(i)}$\\
+
+And,\\
+
+$\frac{\partial J(\Theta)}{\partial\theta} =$
+\[
+\begin{bmatrix}
+2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l1}x_l^{(i)} - y_1^{(i)})x_1^{(i)} & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l2}x_l^{(i)} - y_2^{(i)})x_1^{(i)} & \dots  & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{lk}x_l^{(i)} - y_k^{(i)})x_1^{(i)} \\
+\vdots & \vdots & \vdots \\
+2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l1}x_l^{(i)} - y_1^{(i)})x_n^{(i)} & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l2}x_l^{(i)} - y_2^{(i)})x_n^{(i)} & \dots  & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{lk}x_l^{(i)} - y_k^{(i)})x_n^{(i)}
+\end{bmatrix}
+\]
+\\To show that this is equivalent to $2X(\Theta^{T}X - Y)^T$, let us find the matrix representation of $2X(\Theta^{T}X - Y)^T$: \\
+$\Theta =$
+\[
+\begin{bmatrix}
+\theta_{11} & \dots & \theta_{1k} \\
+\vdots & \vdots & \vdots \\
+\theta_{n1} & \dots & \theta_{nk}
+\end{bmatrix}
+\]
+
+$\Theta^{T}X  =$
+\[
+\begin{bmatrix}
+\theta_{11} & \dots & \theta_{n1} \\
+\vdots & \vdots & \vdots \\
+\theta_{1k} & \dots & \theta_{nk}
+\end{bmatrix}
+\begin{bmatrix}
+x_1^{(1)} & \dots & x_1^{(m)} \\
+\vdots & \vdots & \vdots \\
+x_n^{(1)} & \dots & x_n^{(m)}
+\end{bmatrix}
+\]
+\phantom{$\Theta^{T}X$ }=\\
+\[
+\begin{bmatrix}
+\theta_{11}x_1^{(1)} + \theta_{21}x_2^{(1)} + \dots + \theta_{n1}x_n^{(1)} & \dots & \theta_{11}x_1^{(m)} + \theta_{21}x_2^{(m)} + \dots + \theta_{n1}x_n^{(m)} \\
+\vdots & \vdots & \vdots \\
+\theta_{1k}x_1^{(1)} + \theta_{2k}x_2^{(1)} + \dots + \theta_{nk}x_n^{(1)} & \dots & \theta_{1k}x_1^{(m)} + \theta_{2k}x_2^{(m)} + \dots + \theta_{nk}x_n^{(m)}
+\end{bmatrix}
+\]
+\phantom{$\Theta^{T}X$ }=\\
+\[
+\begin{bmatrix}
+\sum_{l=1}^n \theta_{l1}x_l^{(1)} & \dots & \sum_{l=1}^n \theta_{l1}x_l^{(m)} \\
+\vdots & \vdots & \vdots \\
+\sum_{l=1}^n \theta_{lk}x_l^{(1)} & \dots & \sum_{l=1}^n \theta_{lk}x_l^{(m)}
+\end{bmatrix}
+\]
+$Y =$
+\[
+\begin{bmatrix}
+Y_1^{(1)} & \dots & Y_1^{(m)} \\
+\vdots & \vdots & \vdots \\
+Y_k^{(1)} & \dots & Y_k^{(m)}
+\end{bmatrix}
+\]
+$\Theta^{T}X - Y =$
+\[
+\begin{bmatrix}
+\sum_{l=1}^n \theta_{l1}x_l^{(1)} -  Y_1^{(1)} & \dots & \sum_{l=1}^n \theta_{l1}x_l^{(m)} - Y_1^{(m)} \\
+\vdots & \vdots & \vdots \\
+\sum_{l=1}^n \theta_{lk}x_l^{(1)} - Y_k^{(1)} & \dots & \sum_{l=1}^n \theta_{lk}x_l^{(m)} - Y_k^{(m)}
+\end{bmatrix}
+\]
+$X(\Theta^{T}X - Y)^T =$
+\[
+\begin{bmatrix}
+x_1^{(1)} & \dots & x_1^{(m)} \\
+\vdots & \vdots & \vdots \\
+x_n^{(1)} & \dots & x_n^{(m)}
+\end{bmatrix}
+\begin{bmatrix}
+\sum_{l=1}^n \theta_{l1}x_l^{(1)} -  Y_1^{(1)} & \dots & \sum_{l=1}^n \theta_{lk}x_l^{(1)} - Y_k^{(1)} \\
+\vdots & \vdots & \vdots \\
+\sum_{l=1}^n \theta_{l1}x_l^{(m)} - Y_1^{(m)} & \dots & \sum_{l=1}^n \theta_{lk}x_l^{(m)} - Y_k^{(m)}
+\end{bmatrix}
+\]
+\phantom{$X(\Theta^{T}X - Y)^T $}=\\
+\tiny
+\[
+\begin{bmatrix}
+x_1^{(1)}(\sum_{l=1}^n \theta_{l1}x_l^{(1)}-Y_1^{(1)})+\dots+x_1^{(m)}(\sum_{l=1}^n \theta_{l1}x_l^{(m)}-Y_1^{(m)}) & \dots & x_1^{(1)}(\sum_{l=1}^n \theta_{lk}x_l^{(1)}-Y_k^{(1)})+\dots+x_1^{(m)}(\sum_{l=1}^n \theta_{lk}x_l^{(m)}-Y_k^{(m)})\\
+\vdots & \vdots & \vdots \\
+x_n^{(1)}(\sum_{l=1}^n \theta_{l1}x_l^{(1)}-Y_1^{(1)})+\dots+x_n^{(m)}(\sum_{l=1}^n \theta_{l1}x_l^{(m)}-Y_1^{(m)}) & \dots & x_n^{(1)}(\sum_{l=1}^n \theta_{lk}x_l^{(1)}-Y_k^{(1)})+\dots+x_n^{(m)}(\sum_{l=1}^n \theta_{lk}x_l^{(m)}-Y_k^{(m)})\\
+\end{bmatrix}
+\]
+\normalsize
+\phantom{$X(\Theta^{T}X - Y)^T $}=\\
+\[
+\begin{bmatrix}
+\sum_{i=1}^{m}x_1^{(i)}(\sum_{l=1}^n \theta_{l1}x_l^{(i)}-Y_1^{(i)}) & \dots & \sum_{i=1}^{m}x_1^{(i)}(\sum_{l=1}^n \theta_{lk}x_l^{(i)}-Y_k^{(i)}) \\
+\vdots & \vdots & \vdots \\
+\sum_{i=1}^{m}x_n^{(i)}(\sum_{l=1}^n \theta_{l1}x_l^{(i)}-Y_1^{(i)}) & \dots & \sum_{i=1}^{m}x_n^{(i)}(\sum_{l=1}^n \theta_{lk}x_l^{(i)}-Y_k^{(i)}) 
+\end{bmatrix}
+\]
+
+Hence: \\
+
+$2X(\Theta^{T}X - Y)^T =$
+\[
+\begin{bmatrix}
+2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l1}x_l^{(i)} - y_1^{(i)})x_1^{(i)} & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l2}x_l^{(i)} - y_2^{(i)})x_1^{(i)} & \dots  & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{lk}x_l^{(i)} - y_k^{(i)})x_1^{(i)} \\
+\vdots & \vdots & \vdots \\
+2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l1}x_l^{(i)} - y_1^{(i)})x_n^{(i)} & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{l2}x_l^{(i)} - y_2^{(i)})x_n^{(i)} & \dots  & 2\sum_{i=1}^m(\sum_{l=1}^n\theta_{lk}x_l^{(i)} - y_k^{(i)})x_n^{(i)}
+\end{bmatrix}
+\]
+$Q.E.D$\\
+
+\noindent \textit{\textbf{Part 6 (c)}: Implement vectorized cost function and gradient}\\
+
+The code for the vectorized cost function is:\\
+
+\lstinputlisting[language=Python, firstline=17, lastline=18, breaklines=True]{faces.py}
+
+The code for the vectorized gradient function is:\\
+
+\lstinputlisting[language=Python, firstline=20, lastline=21, breaklines=True]{faces.py}
+
+\textit{Note: X in this code is actually equivalent to the transpose of X matrix from Part 6 (a) and 6 (b). Y in this code is actually equivalent to the transpose of Y matrix from  Part 6 (a) and 6 (b)}\\
+
+\noindent \textit{\textbf{Part 6 (d)}: Verification of Gradient Descent}\\
+
+To ensure that the vectorized gradient function is accurate, the partial derivative of the cost function with respect to $\theta_{pq}$ can be estimated using the finite difference approach according to this equation:\\
+
+$\frac{\partial J(\Theta)}{\partial\theta_{pq}} = \frac{f(\theta_{pq} + h, X, Y) - f(\theta_{pq}, X, Y)}{h}$\\
+
+for a small $h$. The estimated partial derivative can be compared to the result from the gradient function and both computations should generate approximately equivalent results. The average error between the estimated partial derivatives of the cost function with respect to every $\theta_{pq}$ and the gradient function can be analyzed  to verify the accuracy of the vectorized gradient function. The code for this implementation is shown below:\\
+
+\lstinputlisting[language=Python, firstline=154, lastline=168, breaklines=True]{faces.py}
+
+Using $h$ of 0.0001 and running the code with 66 training images from each of the following actors/actresses: Lorraine Bracco, Peri Gilpin, Angie Harmon, Alec Baldwin, Bill Hader and Steve Carell, produced the following result:\\
+\begin{tcolorbox}
+Average error between finite difference and gradient function using h = 0.0001 is: 1.55717971133e-05
+\end{tcolorbox}
+The relatively small error suggests that the implemented vectorized gradient function is correct.
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{Face Recognition for multiple person}\\
+
+The model will be used to perform face recognition for the following actors/actresses: Lorraine Bracco, Peri Gilpin, Angie Harmon, Alec Baldwin, Bill Hader and Steve Carell. The initial parameters $\Theta$ were set to $0$ to ensure faster convergence since the final parameters often lie between $1$ and $-1$. As mentioned in part 2 of the report, the output labels are generated in the following format:\\
+
+Lorraine Bracco = [1, 0, 0, 0, 0, 0]\\
+Peri Gilpin = [0, 1, 0, 0, 0, 0]\\
+Angie Harmon = [0, 0, 1, 0, 0, 0]\\
+Alec Baldwin= [0, 0, 0, 1, 0, 0]\\
+Bill Hader = [0, 0, 0, 0, 1, 0]\\
+Steve Carell = [0, 0, 0, 0, 0, 1]\\
+
+To determine the predicted output of the $i^{th}$ image, the results of the mutiplication of the $\Theta^T$ matrix and the $i^{th}$ column of the $X$ matrix will produce a 6 by 1 vector. The index of the biggest element in the vector will determine the person whom the image belongs to. For example, if the position of the biggest element is at index 2, then the image will be classified as belonging to Angie Harmon since vectors for Angie Harmon's images have a label of 1 in their $2^{nd}$ index. (Using index numbering that starts at 0). The code below computes the accuracy of the face recognition by comparing the position of the biggest element of the predicted output vector with the index of the label 1 in the actual label vector for the image.\\
+
+\lstinputlisting[language=Python, firstline=186, lastline=196, breaklines=True]{faces.py}
+
+A grid search was implemented to find the optimal learning rate $\alpha$ and the maximum number of iterations for running the gradient descent algorithm. The results of the gird serach are shown below:\\
+\clearpage
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Performances1000iterations.png}
+    \caption{Plot of performance vs learning rate for maximum of 1000 iterations}
+    \label{fig:1000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Cost1000iterations.png}
+    \caption{Plot of cost vs learning rate for maximum of 1000 iterations}
+    \label{fig:1000cost}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Performances5000iterations.png}
+    \caption{Plot of performance vs learning rate for maximum of 5000 iterations}
+    \label{fig:5000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Cost5000iterations.png}
+    \caption{Plot of cost vs learning rate for maximum of 5000 iterations}
+    \label{fig:5000cost}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Performances10000iterations.png}
+    \caption{Plot of performance vs learning rate for maximum of 10,000 iterations}
+    \label{fig:10000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Cost10000iterations.png}
+    \caption{Plot of cost vs learning rate for maximum of 10,000 iterations}
+    \label{fig:10000cost}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Performances15000iterations.png}
+    \caption{Plot of performance vs learning rate for maximum of 15,000 iterations}
+    \label{fig:15000per}
+\end{figure*}
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.75]{Part7_Learning_Rate_Cost15000iterations.png}
+    \caption{Plot of cost vs learning rate for maximum of 15,000 iterations}
+    \label{fig:15000cost}
+\end{figure*}
+\clearpage
+It was observed that choosing a learning rate of 0.005 and setting the maximim number of iterations to 10,000 generally produced the best results (higher performance and lower cost). In addition, it was observed that selecting learning rates above 0.006 would often result in an overflow in computing the cost function, likely the result of the cost function growing too big. Shown below is the performance of the classifier with the selected optimizations.
+\begin{tcolorbox}
+Results for chosen learning rate of 0.005 and maximum number of iterations of 10000\\
+Final training set performance: 98.48484848484848 \% \\
+Final validation set performance: 80.0 \% \\
+Final training cost: 0.0846144034294\\
+Final validation cost: 0.242543483824
+\end{tcolorbox}
+
+\textit{Note: Performance of the model will vary slighlty each time the model is run}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\noindent \textit{Visualizing parameters $\Theta$}\\
+
+Shown below are the visualizations of the parameters $\Theta$ for the 6 actors and actresses whose images were analyzed in Part 7: Lorraine Bracco, Peri Gilpin, Angie Harmon, Alec Baldwin, Bill Hader and Steve Carell. The parameters were optimized by running gradient descent for a maximum number of iterations of 10,000 with the selected learning rate $\alpha$ of 0.005. There were 6 visualizations produced in total, one for each actor/actress.
+
+\begin{figure*}[!ht]
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part8_person_0.jpg}
+  \caption{Parameters for\\ Lorraine Bracco.}
+  \label{fig:sfig1}%
+\end{subfigure}
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part8_person_1.jpg}
+  \caption{Parameters for\\ Peri Gilpin.}
+  \label{fig:sfig2}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part8_person_2.jpg}
+  \caption{Parameters for\\ Angie Hammon.}
+  \label{fig:sfig3}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part8_person_3.jpg}
+  \caption{Parameters for\\ Alec Baldwin.}
+  \label{fig:sfig4}
+\end{subfigure}%
+
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part8_person_4.jpg}
+  \caption{Parameters for\\ Bill Hader.}
+  \label{fig:sfig5}
+\end{subfigure}%
+\begin{subfigure}{.35\textwidth}
+  \includegraphics[width=.35\linewidth]{Part8_person_5.jpg}
+  \caption{Parameters for\\ Steve Carell.}
+  \label{fig:sfig6}
+\end{subfigure}%
+\end{figure*}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\end{document}
