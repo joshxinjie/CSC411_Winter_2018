@@ -1,6 +1,6 @@
 # CSC411_Winter_2018
 
-Projects completed for the Winter 2018 session of the course CSC411 Machine Learning and Data Mining. The projects' requirements can be accessed with this [link](https://www.teach.cs.toronto.edu/~csc411h/winter/projects.html).
+Projects completed for the University of Toronto's Winter 2018 session of the course CSC411 Machine Learning and Data Mining. The projects' requirements can be accessed with this [link](https://www.teach.cs.toronto.edu/~csc411h/winter/projects.html).
 
 Project 1: Face Recognition and Gender Classification with Regression
 
