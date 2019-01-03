@@ -23,14 +23,14 @@ The full report of the project can be found [here](https://github.com/joshxinjie
 The detailed requirements for the project can be found at [link](https://www.teach.cs.toronto.edu/~csc411h/winter/projects/proj1/).
 
 ## Files
-faces.py - Main script for the project
-faces.tex - Project Report LaTeX file
-faces.pdf - Project Report
-facescrub_actors.txt - Contains the download links for the actors' images
-facescrub_actresses.txt - Contains the download links for the actresses' images
-get_data.py - Downloads and pre-processes the images from the download links
-rgb2gray.py - Contains helper function to convert RGB images to greyscale
-subset_actors.txt - Contains list of actors' and actresses' names whose images we will work with in this project
+1. faces.py - Main script for the project
+2. faces.tex - Project Report LaTeX file
+3. faces.pdf - Project Report
+4. facescrub_actors.txt - Contains the download links for the actors' images
+5. facescrub_actresses.txt - Contains the download links for the actresses' images
+6. get_data.py - Downloads and pre-processes the images from the download links
+7. rgb2gray.py - Contains helper function to convert RGB images to greyscale
+8. subset_actors.txt - Contains list of actors' and actresses' names whose images we will work with in this project
 
 ## Installations
 Anaconda
