@@ -1,7 +1,7 @@
 # Project 1: Face Recognition and Gender Classification with Regression
 
 ## Description
-Build a system based on linear regression for face recognition and gender classification from scratch with just numpy. We will be using images of actors and actresses to train and test our system. These images were obtained from [FaceScrub](http://vintage.winklerbros.net/facescrub.html).
+Build a system based on linear regression for face recognition and gender classification from scratch with just numpy. We will be using images of actors and actresses to train and test our system. These images were obtained from [FaceScrub](http://vintage.winklerbros.net/facescrub.html). Written in Python3.
 
 The main programming tasks of the project involved:
 
