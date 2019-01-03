@@ -33,4 +33,4 @@ The detailed requirements for the project can be found at [link](https://www.tea
 8. subset_actors.txt - Contains list of actors' and actresses' names whose images we will work with in this project
 
 ## Installations
-Anaconda
+Anaconda, glob, os, urllib, hashlib
