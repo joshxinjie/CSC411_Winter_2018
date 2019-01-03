@@ -6,17 +6,17 @@ Build a system based on linear regression for face recognition and gender classi
 The main programming tasks of the project involved:
 
 Task 1: Build a classifier to distinguish pictures of Alec Baldwin from Steve Carell
-Accuracy on the train set: 100.0%
-Accuracy of the test set: 95.0%
+* Accuracy on the train set: 100.0%
+* Accuracy of the test set: 95.0%
 
 Task 2: Build a classifier to perform gender classification. We will train and test the system on images from 6 actors/actresses. We will then test classifier on 30 images of unknown actor/actresses:
-Accuracy on the train set (6 known actors/actresses): 98.97%
-Accuracy on the test set (6 known actors/actresses): 91.67%
-Accuracy on the unknown actor/actresses test set: 85.56%
+* Accuracy on the train set (6 known actors/actresses): 98.97%
+* Accuracy on the test set (6 known actors/actresses): 91.67%
+* Accuracy on the unknown actor/actresses test set: 85.56%
 
 Task 3: Build a classifier to peform facial recognition for 6 actors/actresses.
-Accuracy on the train set: 98.48%
-Accuracy of the test set: 80.0%
+* Accuracy on the train set: 98.48%
+* Accuracy of the test set: 80.0%
 
 The full report of the project can be found [here](https://github.com/joshxinjie/CSC411_Winter_2018/blob/master/Project_1/faces.pdf)
 
