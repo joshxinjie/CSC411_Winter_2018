@@ -1,5 +1,6 @@
 # Project 4 Bonus: Tic-Tac-Toe with Self-Play
 
+## Description
 Continue training an agent to play Tic-Tac-Toe using Policy Gradient. Add additional functionalities to the machine learning agent from Project 4:
 
 1. The agent will make the first move only 50% of the times
