@@ -5,6 +5,8 @@ Continue training an agent to play Tic-Tac-Toe using Policy Gradient. Add additi
 1. The agent will make the first move only 50% of the times
 2. The agent will be trained by playing against a version of itself
 
+The code is tested with Python 3 and Pytorch 0.30.
+
 Detailed report of the project can be found [here](https://github.com/joshxinjie/CSC411_Winter_2018/blob/master/Project_4_Bonus/tictactoe_bonus.pdf).
 
 The detailed requirements for the project can be found [here](https://www.teach.cs.toronto.edu/~csc411h/winter/projects/proj4b/).
