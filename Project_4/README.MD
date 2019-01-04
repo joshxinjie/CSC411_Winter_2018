@@ -1,5 +1,6 @@
 # Project 4: Tic-Tac-Toe with Policy Gradient
 
+## Description
 Use Reinforcement Learning, specifically policy gradient, to train a neural network to play Tic-Tac-Toe. The agent will be training against a random computer opponent, and our agent will always make the first move.
 
 Unlike the first 3 projects in the course, this project includes a considerable amount of starter code, a large proportion of which is the tic-tac-toe game environment.
