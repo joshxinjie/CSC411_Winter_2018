@@ -10,6 +10,11 @@ For the detailed report of the project, click [here](https://github.com/joshxinj
 
 The detailed requirements for the project can be found at [link](https://www.teach.cs.toronto.edu/~csc411h/winter/projects/proj4/).
 
+## Files
+1. tictactoe.pdf - The project report
+2. tictactoe.py - The script for training and testing our agent. Also includes the game environment.
+3. tictactoe.tex - The project report LaTeX file
+
 ## Summary of Results
 In 100 games against a random computer opponent while making the first move, our trained agent achieved:
 
