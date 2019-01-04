@@ -24,3 +24,5 @@ Anaconda, Pytorch, OS
 The bonus problem for this project involves 2 modifications for our agent:
 1. Make the first move only 50% of the time against a random computer agent
 2. Implementing self-play where our agent trains against a version of itself
+
+Our solution to the bonus problem can be found [here](https://github.com/joshxinjie/CSC411_Winter_2018/tree/master/Project_4_Bonus).
